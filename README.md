@@ -58,13 +58,29 @@ add this resolver :
 
 	resolvers += Resolver.url("Fred's GitHub Play Repository", url("http://fmasion.github.com/releases/"))(Resolver.ivyStylePatterns)
 
+In your application, add to `conf/play.plugins` (or create the file if it dosn't exist) this configuration :
+
+	1500:playvertx.VertxPlugin
+
+The first number is a priority you can asjust it if you have other plugins which depend on the one
   
 ## Try the sample app
 
-In the project directory you have a sample app check it out
+In the project directory you have a sample app check it out :
+
+*NB : this is a port of the vert.x event bus sample app*
+
+you can launch it open diferent browser on the same url : 
+
+* you first have to connect
+* register to one or more channels
+* publish messages to these channels
+* there's a special channel called **someaddress**. Play sends periodic messages to this channel and listen to it too. all messages sent to this channel are sent to the play console
 
 
 As usual it's provided without warranty. So try it, fork it, improve it, create issues, feel free to ask question but don't expect me to be very available.
+
+Have Fun !
 
 ## License
 
