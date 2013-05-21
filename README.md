@@ -63,6 +63,16 @@ In your application, add to `conf/play.plugins` (or create the file if it dosn't
 	1500:playvertx.VertxPlugin
 
 The first number is a priority you can asjust it if you have other plugins which depend on the one
+
+Finally in the `conf/application.conf` you can configure some element of vert.x for clustering and for the sockjs connection :
+
+	playVertX.clusterPort=25001
+	#playVertX.clusterHost=
+	playVertX.eventBusUrlPrefix="/eventbus"
+	playVertX.httpPort=8080
+
+Notice that this plugin create a new instance of netty server so your websocket (and fallbacks) won't (and can't) use play's default port (aka : 9000)
+
   
 ## Try the sample app
 

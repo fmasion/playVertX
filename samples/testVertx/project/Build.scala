@@ -15,8 +15,8 @@ object ApplicationBuild extends Build {
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here      
-    //resolvers += "Local Play Repository" at "file://Users/fred/Developpement/play-2.1.1/repository/local"
-    resolvers += Resolver.url("Fred's GitHub Play Repository", url("http://fmasion.github.com/releases/"))(Resolver.ivyStylePatterns)
+    resolvers += "Local Play Repository" at "file://Users/fred/Developpement/play-2.1.1/repository/local"
+    //resolvers += Resolver.url("Fred's GitHub Play Repository", url("http://fmasion.github.com/releases/"))(Resolver.ivyStylePatterns)
   )
   ///Users/fred/Developpement/play-2.1.0/repository/local
 

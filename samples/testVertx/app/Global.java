@@ -16,8 +16,6 @@ import scala.concurrent.duration.Duration;
 
 public class Global extends GlobalSettings {
 
-	// Vertx vertx = Vertx.newVertx();
-
 	@Override
 	public void onStart(Application app) {
 		Logger.info("TESTVERTX : Application has started");
