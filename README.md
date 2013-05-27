@@ -4,7 +4,7 @@
 =========
 
 
-# Forword about vert.x
+# Foreword about vert.x
 
 Vert.x is an amazing polyglot event driven framework that runs on the JVM. A kind of mix of the actor and reactor patterns.
 It's a quite similar programing model as Node.js with some interesting features for clustering and threads pools for workers… I recommand you to take a look by yourself [http://vertx.io](http://vertx.io).
