@@ -1,6 +1,6 @@
 #PlayVertX
 
-### Playframework 2.1 / vert.x EventBus integration
+### Playframework 2.2 / vert.x EventBus integration
 =========
 
 
@@ -30,7 +30,7 @@ Take a look at the [vert.x documentation](http://vertx.io/core_manual_java.html#
 
 ## This Play Plugin
 
-This plugin is a `quick and dirty` integration of vert.x core library in Play Framework > 2.1 to expose the vert.x event bus to play.
+This plugin is a `quick and dirty` integration of vert.x core library in Play Framework > 2.2 to expose the vert.x event bus to play.
 It enables play app to integrate a cluster.
 Publish and subscribe to messages on the cluster.
 And it enables to use the event bus in the browser. 
@@ -50,9 +50,14 @@ Ok, want to give it a try ?
 
 In your application, add this configuration to the `project/Build.scala` file :
 
-add this dependency :
+add this dependency for play 2.1.x :
 
 	"playvertx"  % "playvertx_2.10" % "0.1"
+
+add this dependency for play 2.2.x :
+
+	"playvertx"  % "playvertx_2.10" % "0.1.1"
+
 
 add this resolver :
 
