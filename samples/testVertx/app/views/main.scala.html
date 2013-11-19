@@ -2,23 +2,11 @@
 
 <!DOCTYPE html>
 
-<!--html>
-    <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
-    </head>
-    <body>
-        @content
-    </body>
-</html-->
-
 <html>
 <head>
   <title>@title</title>
   <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
-  <script src="http://cdn.sockjs.org/sockjs-0.2.1.min.js"></script>
+  <script src="http://cdn.sockjs.org/sockjs-0.3.4.min.js"></script>
   <script src="@routes.Assets.at("javascripts/vertxbus.js")" type="text/javascript"></script>
 </head>
 <style>
@@ -97,7 +85,7 @@
   function publish(address,  message) {
     if (eb) {
       var json = {text: message};
-      eb.publish(address, json);
+      eb.publish(address, 123.2);
       $('#sent').append($("<code>").text("Address:" + address + " Message:" + message));
       $('#sent').append($("</code><br>"));
     }
@@ -106,7 +94,7 @@
   function subscribe(address) {
     if (eb) {
       eb.registerHandler(address, function(msg, replyTo) {
-        $('#received').append("Address:" + address + " Message:" + msg.text + "<br>");
+        $('#received').append("Address:" + address + " Message:" + msg + "<br>");
       });
       $('#subscribed').append($("<code>").text("Address:" + address));
       $('#subscribed').append($("</code><br>"));
@@ -121,9 +109,7 @@
 
   function openConn() {
     if (!eb) {
-      //eb = new vertx.EventBus("http://push.arcadium.lo/eventbus");
       eb = new vertx.EventBus("http://localhost:8080/eventbus");
-
 
       eb.onopen = function() {
         $("#status_info").text("Connected");

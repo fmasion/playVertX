@@ -35,9 +35,30 @@ var vertx = vertx || {};
     var handlerMap = {};
     var replyHandlers = {};
     var state = vertx.EventBus.CONNECTING;
+    var sessionID = null;
+    var pingTimerID = null;
+    var pingInterval = null;
+    if (options) {
+      pingInterval = options['vertxbus_ping_interval'];
+    }
+    if (!pingInterval) {
+      pingInterval = 5000;
+    }
   
     that.onopen = null;
     that.onclose = null;
+
+    that.login = function(username, password, replyHandler) {
+      sendOrPub("send", 'vertx.basicauthmanager.login', {username: username, password: password}, function(reply) {
+        if (reply.status === 'ok') {
+          that.sessionID = reply.sessionID;
+        }
+        if (replyHandler) {
+          delete reply.sessionID;
+          replyHandler(reply)
+        }
+      });
+    }
   
     that.send = function(address, message, replyHandler) {
       sendOrPub("send", address, message, replyHandler)
@@ -85,6 +106,7 @@ var vertx = vertx || {};
   
     that.close = function() {
       checkOpen();
+      if (pingTimerID) clearInterval(pingTimerID);
       state = vertx.EventBus.CLOSING;
       sockJSConn.close();
     }
@@ -94,6 +116,9 @@ var vertx = vertx || {};
     }
   
     sockJSConn.onopen = function() {
+      // Send the first ping then send a ping every 5 seconds
+      sendPing();
+      pingTimerID = setInterval(sendPing, 5000);
       state = vertx.EventBus.OPEN;
       if (that.onopen) {
         that.onopen();
@@ -132,20 +157,29 @@ var vertx = vertx || {};
         // Might be a reply message
         var handler = replyHandlers[address];
         if (handler) {
-          delete replyHandlers[replyAddress];
+          delete replyHandlers[address];
           handler(body, replyHandler);
         }
       }
     }
+
+    function sendPing() {
+      var msg = {
+        type: "ping"
+      }
+      sockJSConn.send(JSON.stringify(msg));
+    }
   
     function sendOrPub(sendOrPub, address, message, replyHandler) {
       checkSpecified("address", 'string', address);
-      checkSpecified("message", 'object', message);
       checkSpecified("replyHandler", 'function', replyHandler, true);
       checkOpen();
       var envelope = { type : sendOrPub,
                        address: address,
                        body: message };
+      if (that.sessionID) {
+        envelope.sessionID = that.sessionID;
+      }
       if (replyHandler) {
         var replyAddress = makeUUID();
         envelope.replyAddress = replyAddress;
