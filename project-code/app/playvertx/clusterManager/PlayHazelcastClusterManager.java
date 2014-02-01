@@ -71,7 +71,7 @@ public class PlayHazelcastClusterManager implements ClusterManager, MembershipLi
   }
 
   public synchronized void join() {
-	log.error("Starting Custom Cluster Manager yeepeekai");  
+	log.info("Starting Custom Cluster Manager yeepeekai");  
     if (active) {
       return;
     }

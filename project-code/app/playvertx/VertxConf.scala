@@ -21,10 +21,8 @@ object VertxConf {
     if (useHazelCastPlugin) {
       val clazz = PlayHazelcastClusterManagerFactory.getClazzName
       System.setProperty("vertx.clusterManagerFactory", clazz)
-      log.error("Should start cluster")
     } else {
       System.clearProperty("vertx.clusterManagerFactory")
-      log.error("Should NOT start cluster")
     }
 
   }
