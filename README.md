@@ -1,6 +1,6 @@
 #PlayVertX
 
-## Playframework 2.2.x / vert.x 2.1M5 integration
+## Playframework 2.2.x / vert.x 2.1RC1 integration
 =========
 
 
@@ -76,12 +76,12 @@ In your application, add this configuration to the `project/Build.scala` file :
 
 add this dependency for play 2.2.x :
 
-	"playvertx"  % "playvertx_2.10" % "2.1M5"
+	"playvertx"  % "playvertx_2.10" % "2.1RC1"
 
 
 if you want cluster support add also :
 
-	"playhazelcast"  % "playhazelcast_2.10" % "2.6.6"
+	"playhazelcast"  % "playhazelcast_2.10" % "2.6.7"
 
 
 
