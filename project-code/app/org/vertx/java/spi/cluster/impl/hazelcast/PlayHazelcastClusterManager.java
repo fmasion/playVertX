@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package playvertx.clusterManager;
+package org.vertx.java.spi.cluster.impl.hazelcast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.hazelcast.core.*;
 import org.vertx.java.core.logging.Logger;
 import org.vertx.java.core.logging.impl.LoggerFactory;
 import org.vertx.java.core.spi.VertxSPI;
@@ -31,14 +32,8 @@ import org.vertx.java.core.spi.cluster.AsyncMap;
 import org.vertx.java.core.spi.cluster.AsyncMultiMap;
 import org.vertx.java.core.spi.cluster.ClusterManager;
 import org.vertx.java.core.spi.cluster.NodeListener;
-
 import com.hazelcast.config.Config;
 import com.hazelcast.config.XmlConfigBuilder;
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
-import com.hazelcast.core.Member;
-import com.hazelcast.core.MembershipEvent;
-import com.hazelcast.core.MembershipListener;
 
 /**
  * A cluster manager that uses Hazelcast
@@ -58,6 +53,8 @@ public class PlayHazelcastClusterManager implements ClusterManager, MembershipLi
   private HazelcastInstance hazelcast;
   private String nodeID;
   private NodeListener nodeListener;
+  private String membershipListenerId;
+
   private boolean active;
 
   /**
@@ -76,17 +73,17 @@ public class PlayHazelcastClusterManager implements ClusterManager, MembershipLi
       return;
     }
     nodeID = hazelcast.getCluster().getLocalMember().getUuid();
-    hazelcast.getCluster().addMembershipListener(this);
+    membershipListenerId = hazelcast.getCluster().addMembershipListener(this);
 
     active = true;
   }
 
 	/**
-	 * Every eventbus handler has an ID. SubsMap (subscriber map) is a MultiMap which 
-	 * maps handler-IDs with server-IDs and thus allows the eventbus to determine where 
+	 * Every eventbus handler has an ID. SubsMap (subscriber map) is a MultiMap which
+	 * maps handler-IDs with server-IDs and thus allows the eventbus to determine where
 	 * to send messages.
-	 * 
-	 * @param name A unique name by which the the MultiMap can be identified within the cluster. 
+	 *
+	 * @param name A unique name by which the the MultiMap can be identified within the cluster.
 	 *     See the cluster config file (e.g. cluster.xml in case of HazelcastClusterManager) for
 	 *     additional MultiMap config parameters.
 	 * @return subscription map
@@ -132,7 +129,7 @@ public class PlayHazelcastClusterManager implements ClusterManager, MembershipLi
     if (!active) {
       return;
     }
-    hazelcast.getCluster().removeMembershipListener(this);
+    hazelcast.getCluster().removeMembershipListener(membershipListenerId);
  		hazelcast.getLifecycleService().shutdown();
     active = false;
   }
@@ -165,6 +162,10 @@ public class PlayHazelcastClusterManager implements ClusterManager, MembershipLi
     } catch (Throwable t) {
       log.error("Failed to handle memberRemoved", t);
     }
+  }
+
+  @Override
+  public void memberAttributeChanged(MemberAttributeEvent memberAttributeEvent) {
   }
 
   private InputStream getConfigStream() {

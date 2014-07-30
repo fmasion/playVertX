@@ -3,6 +3,7 @@ package playvertx.clusterManager;
 import org.vertx.java.core.spi.VertxSPI;
 import org.vertx.java.core.spi.cluster.ClusterManager;
 import org.vertx.java.core.spi.cluster.ClusterManagerFactory;
+import org.vertx.java.spi.cluster.impl.hazelcast.PlayHazelcastClusterManager;
 import playHazelcast.api.*;
 import scala.Option;
 
