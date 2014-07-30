@@ -9,11 +9,8 @@ object VertX {
   private var plateformManager: Option[PlatformManager] = None
 
   private def start = {
-    plateformManager = if (VertxConf.isClustered) {
-      Option(PlatformLocator.factory.createPlatformManager(0, ""))
-    } else {
-      Option(PlatformLocator.factory.createPlatformManager())
-    }
+    val maybeClustered = hz.map(_.getCluster.getLocalMember.getSocketAddress.getAddress.getHostAddress)
+    plateformManager = Some(maybeClustered.fold(PlatformLocator.factory.createPlatformManager())(host => PlatformLocator.factory.createPlatformManager(0, host)))
   }
 
   private[playvertx] def stop = {
