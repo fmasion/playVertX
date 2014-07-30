@@ -7,7 +7,7 @@ import play.api.Logger
 import playvertx.clusterManager.PlayHazelcastClusterManagerFactory
 
 object VertxConf {
-  val log = Logger("VertxConf")
+  val log = Logger("playvertx.VertxConf")
 
   lazy val isClustered = useHazelCastPlugin
 

@@ -5,7 +5,7 @@ import org.vertx.java.platform.PlatformLocator
 import org.vertx.java.core.VertxFactory
 
 class VertxPlugin(app:Application) extends Plugin {
-  val log = Logger("VertxPlugin")
+  val log = Logger("playvertx.VertxPlugin")
 
   override def onStart() {
     log.info("Starting vert.x")
