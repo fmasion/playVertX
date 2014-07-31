@@ -1,6 +1,6 @@
 #PlayVertX
 
-## Playframework 2.2.x / vert.x 2.1RC1 integration
+## Playframework 2.2.x / vert.x 2.1.2 integration
 =========
 
 
@@ -76,18 +76,18 @@ In your application, add this configuration to the `project/Build.scala` file :
 
 add this dependency for play 2.2.x :
 
-	"playvertx"  % "playvertx_2.10" % "2.1RC1"
+	"playvertx"  % "playvertx_2.10" % "2.1.2-play2.2"
 
 
 if you want cluster support add also :
 
-	"playhazelcast"  % "playhazelcast_2.10" % "2.6.7"
+	"playhazelcast"  % "playhazelcast_2.10" % "3.2.3-play2.2"
 
 
 
-add this resolver :
+	add this resolver :
 
-	resolvers += Resolver.url("Fred's GitHub Play Repository", url("http://fmasion.github.com/releases/"))(Resolver.ivyStylePatterns)
+	 resolvers += "bintray" at "http://dl.bintray.com/fmasion/maven"
 
 In your application, add to `conf/play.plugins` (or create the file if it dosn't exist) this configuration :
 

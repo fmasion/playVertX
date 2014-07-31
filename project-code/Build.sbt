@@ -1,21 +1,36 @@
-name     := "playVertx"
+name     := "playVertX"
 
-version  := "2.1.2"
+version  := "2.1.2-play2.2"
 
-resolvers += Resolver.url("Fred's GitHub Play Repository", url("http://fmasion.github.com/releases/"))(Resolver.ivyStylePatterns)
+val vertxVersion = "2.1.2"
+
+val playHazelcastVersion = "3.2.3-play2.2"
+
+val jacksonVersion = "2.2.2"
+
+val nettyVersion = "4.0.17.Final"
+
+resolvers += "bintray" at "http://dl.bintray.com/fmasion/maven"
 
 libraryDependencies ++= Seq(
   // Add your project dependencies here,
-  "io.vertx" % "vertx-platform" % version.value,
-  "io.vertx" % "vertx-core" % version.value,
-  "io.vertx" % "vertx-hazelcast" % version.value,
-  "playhazelcast"  % "playhazelcast_2.10" % "3.2.3-play2.2",
-  "com.fasterxml.jackson.core" % "jackson-annotations" % "2.2.2",
-  "com.fasterxml.jackson.core" % "jackson-core" % "2.2.2",
-  "com.fasterxml.jackson.core" % "jackson-databind" % "2.2.2",
-  "io.netty" % "netty-all" % "4.0.17.Final"
+  "io.vertx" % "vertx-platform" % vertxVersion,
+  "io.vertx" % "vertx-core" % vertxVersion,
+  "io.vertx" % "vertx-hazelcast" % vertxVersion,
+  "playhazelcast"  % "playhazelcast_2.10" % playHazelcastVersion,
+  "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,
+  "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
+  "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
+  "io.netty" % "netty-all" % nettyVersion
 )
 
 play.Project.playScalaSettings
 
+publishTo := Some("Fred's bintray" at "https://api.bintray.com/maven/fmasion/maven/playVertX")
+
+publishMavenStyle := true
+
+scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
+
+//javacOptions += "-Xlint:all"
 

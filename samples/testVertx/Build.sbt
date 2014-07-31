@@ -5,11 +5,10 @@
   libraryDependencies ++= Seq(
     // Add your project dependencies here,
     javaCore,
-    "playvertx"  % "playvertx_2.10" % "2.1RC1"
+    "playvertx"  % "playvertx_2.10" % "2.1.2-play2.2"
   )
 
-  resolvers += Resolver.url("Fred's GitHub Play Repository", url("http://fmasion.github.com/releases/"))(Resolver.ivyStylePatterns)
+  resolvers += "bintray" at "http://dl.bintray.com/fmasion/maven"
 
   play.Project.playScalaSettings
-
 
