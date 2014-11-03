@@ -1,10 +1,10 @@
 name     := "playVertX"
 
-version  := "2.1.2-play2.2"
+version  := "2.1.2-play2.3"
 
 val vertxVersion = "2.1.2"
 
-val playHazelcastVersion = "3.2.3-play2.2"
+val playHazelcastVersion = "3.2.3-play2.3"
 
 val jacksonVersion = "2.2.2"
 
@@ -24,8 +24,6 @@ libraryDependencies ++= Seq(
   "io.netty" % "netty-all" % nettyVersion
 )
 
-play.Project.playScalaSettings
-
 publishTo := Some("Fred's bintray" at "https://api.bintray.com/maven/fmasion/maven/playVertX")
 
 publishMavenStyle := true
@@ -34,3 +32,4 @@ scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
 
 //javacOptions += "-Xlint:all"
 
+lazy val playVertX= (project in file(".")).enablePlugins(PlayScala)
