@@ -1,14 +1,14 @@
 name     := "playVertX"
 
-version  := "2.1.2-play2.3"
+version  := "2.1.4-play2.3"
 
-val vertxVersion = "2.1.2"
+val vertxVersion = "2.1.4"
 
 val playHazelcastVersion = "3.2.3-play2.3"
 
 val jacksonVersion = "2.2.2"
 
-val nettyVersion = "4.0.17.Final"
+val nettyVersion = "4.0.21.Final"
 
 resolvers += "bintray" at "http://dl.bintray.com/fmasion/maven"
 
