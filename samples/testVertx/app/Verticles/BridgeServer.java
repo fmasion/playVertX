@@ -9,7 +9,6 @@ import org.vertx.java.core.logging.Logger;
 import org.vertx.java.core.sockjs.SockJSServer;
 import org.vertx.java.platform.Verticle;
 
-import playvertx.clusterManager.PlayHazelcastClusterManager;
 
 /**
  * @author <a href="http://tfox.org">Tim Fox</a>

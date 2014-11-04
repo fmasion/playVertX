@@ -1,7 +1,3 @@
-name     := "playVertX"
-
-version  := "2.1.4-play2.3"
-
 val vertxVersion = "2.1.4"
 
 val playHazelcastVersion = "3.2.3-play2.3"
@@ -29,7 +25,3 @@ publishTo := Some("Fred's bintray" at "https://api.bintray.com/maven/fmasion/mav
 publishMavenStyle := true
 
 scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
-
-//javacOptions += "-Xlint:all"
-
-lazy val playVertX= (project in file(".")).enablePlugins(PlayScala)

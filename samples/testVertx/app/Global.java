@@ -15,20 +15,19 @@ import org.vertx.java.platform.PlatformManager;
 
 import Verticles.BridgeServer;
 
+import org.vertx.java.spi.cluster.impl.hazelcast.PlayHazelcastClusterManager;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
 import playvertx.VertX;
-import playvertx.clusterManager.PlayHazelcastClusterManager;
 import scala.concurrent.duration.Duration;
-import scala.Option;
 
 public class Global extends GlobalSettings {
 
 	@Override
 	public void onStart(Application app) {
 		Logger.info("TESTVERTX : Application has started");
-		PlayHazelcastClusterManager clusterManager; 
+		PlayHazelcastClusterManager clusterManager;
 		PlatformManager pm = VertX.pm().get();
 		String clazz = BridgeServer.class.getName();
 		pm.deployVerticle(clazz, null, new URL[] {}, 3, null, null);
