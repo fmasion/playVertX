@@ -55,10 +55,13 @@ public class Global extends GlobalSettings {
 		Akka.system()
 				.scheduler()
 				.schedule(Duration.create(2, TimeUnit.SECONDS),
-						Duration.create(2, TimeUnit.SECONDS), () -> {
-							Map<String, Object> jsonMap = new HashMap<>();
-							jsonMap.put("text", "Hello, someaddress!" + DateTime.now());
-							bus.publish("someaddress", new JsonObject(jsonMap));
+						Duration.create(2, TimeUnit.SECONDS), new Runnable() {
+							@Override
+							public void run() {
+								Map<String, Object> jsonMap = new HashMap<>();
+								jsonMap.put("text", "Hello, someaddress!" + DateTime.now());
+								bus.publish("someaddress", new JsonObject(jsonMap));
+							}
 						}, play.libs.Akka.system().dispatcher());
 	}
 
