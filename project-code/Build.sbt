@@ -20,8 +20,19 @@ libraryDependencies ++= Seq(
   "io.netty" % "netty-all" % nettyVersion
 )
 
-publishTo := Some("Fred's bintray" at "https://api.bintray.com/maven/fmasion/maven/playVertX")
+publishTo := Some("eu.byjean.repo" at "https://api.bintray.com/maven/jeantil/maven/play-predictionio")
+
+//publishTo := Some("Fred's bintray" at "https://api.bintray.com/maven/fmasion/maven/playVertX")
 
 publishMavenStyle := true
 
 scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
+
+buildInfoSettings
+
+buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion, "vertxVersion"->vertxVersion )
+
+buildInfoPackage := "playvertx"
+
+sourceGenerators in Compile <+= buildInfo
+
